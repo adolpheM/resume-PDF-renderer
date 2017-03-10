@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  get "/resumePdf/:id", to: 'resumePdf#show'
+  get "/resume-pdf/:id", to: 'resumes#show'
 end
