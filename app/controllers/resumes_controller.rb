@@ -1,12 +1,17 @@
 class ResumesController < ApplicationController
 
   def show
-    @resume = Resume.find(params[:id])
+    # @resume = Unirest stuff
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = Resume.new(@resume, view_context)
-        send_data pdf.render, filename: 
+        pdf = Prawn::Document.new
+        pdf.text "Hello World from Prwan!!!"
+
+        send_data pdf.render, type: "application/pdf",
+                              disposition: "inline"
+
+
       end
     end    
   end
