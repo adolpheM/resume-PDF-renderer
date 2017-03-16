@@ -1,6 +1,13 @@
 class ResumePdf < Prawn::Document 
 
-  def initialize
+  def initialize(student)
+    super 
+
+    @student = student 
+    
+  end
+
+  def 
     
   end
 
