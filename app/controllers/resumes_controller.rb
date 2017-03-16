@@ -1,19 +1,16 @@
 class ResumesController < ApplicationController
 
   def show
-    @student = Unirest.get("http://localhost:3000/api/v2/students/#{params[:id]}.json", :headers => {"Accept"=> "application/json"}, :parameters => params).body
+    @student = Unirest.get("http://localhost:3000/api/v2/students/1.json", :headers => {"Accept"=> "application/json"}).body
     respond_to do |format|
       format.html
-      format.json{render json: @student}
       format.pdf do
-        pdf = ResumePdf.new(@student)
-
-        send_data pdf.render, type: "application/pdf",
+        pdf = StudentPdf.new(@student)
+        send_data pdf.render, filename: "Student#{@student['id']}.pdf",
+                              type: "application/pdf",
                               disposition: "inline"
-
-
       end
-    end    
+    end   
   end
 
 end
